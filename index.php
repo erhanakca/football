@@ -4,19 +4,50 @@ include 'header.php';
 
 require 'database.php';
 
-$lig = $db->query("SELECT * FROM ligs")->fetchAll(PDO::FETCH_ASSOC)
-
+$lig = $db->query("SELECT * FROM ligs")->fetchAll(PDO::FETCH_ASSOC);
+$team = $db->query("SELECT * FROM teams")->fetchAll(PDO::FETCH_ASSOC)
 ?>
 
-<a href="lig_add.php">Lig Add</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-1 mt-5">
+            <a href="lig_add.php"><button type="button" class="btn btn-primary">League Add</button></a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-1 mt-5">
+            <?php if(count($lig) > 0):
+                echo '<a href="team_add.php" <button type="button" class="btn btn-success">Team Add</button></a>';
+            else: echo '<a href="team_add.php" <button type="button" class="btn btn-success disabled">Team Add</button></a>';
+            endif;
+            ?>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row py-4">
+            <ul class="list-group col-sm-6 col-12 col-lg-6">
+                <span class="list-group-item fs-5 bg-success text-light"><i class="fa-solid fa-shield-halved"></i> Leagues</span>
+                <?php foreach ($lig as $item): ?>
+                <li class="list-group-item fw-bold d-flex justify-content-between align-items-center">
+                    <?php echo $item['lig_name'] ?>
+                    <span class="badge bg-warning rounded-pill"><?php count($team) ?>TEAM</span>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+            <ul class="list-group col-sm-6 col-12 col-lg-6">
+                <span class="list-group-item fs-5 bg-dark text-light"><i class="fa-solid fa-people-group"></i> Teams</span>
+                <?php foreach ($team as $item): ?>
+                <li class="list-group-item fw-bold d-flex justify-content-between align-items-center">
+                    <?php echo $item['team_name']?>
+                </li>
+               <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/7ed19c3a98.js" crossorigin="anonymous"></script>
+    </div>
+</div>
 
-<?php if(count($lig) == 0):
 
-echo '<button type="button" class="btn btn-link disabled">Team Add</button>';
 
-else: echo '<button type="button" class="btn btn-link">Team Add</button>';
-
-endif;
-
-?>
 
