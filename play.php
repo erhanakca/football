@@ -29,16 +29,4 @@
     </div>
 </div>
 
-<?php
 
-$takim = 60;
-$takim1 = 80;
-
-$rnd = rand(10,100);
-
-
-
-
-echo $rnd
-
-?>

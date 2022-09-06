@@ -43,6 +43,8 @@ if ($takim3['strength'] > $takim4['strength']){
     $team3_gol = rand(0, 2);
 }
 
+
+
 $skor1_hazirla = $db->prepare("UPDATE skors 
                                         SET attigi=:attigi, yedigi=:yedigi, avg=:avg, kazandigi=:kazandigi, puan=:puan 
                                         WHERE team_id=:team_id");
@@ -68,53 +70,262 @@ if($team1_gol > $team2_gol){
 
     $skor2_hazirla->execute([
         'team_id' => $takim2['team_id'],
-        'attigi' => $team2_gol,
-        'yedigi' => $team1_gol,
-        'puan' => 0,
-        'avg' => 0,
-        'kazandigi' => 0
+        'attigi' => (int)$skor2['attigi'] + $team2_gol,
+        'yedigi' => (int)$skor2['yedigi'] + $team1_gol,
+        'puan' => (int)$skor2['puan'] + 0,
+        'avg' => (int)$skor2['avg'] + 0,
+        'kazandigi' => (int)$skor2['kazandigi'] + 0
     ]);
 
 }else if($team2_gol > $team1_gol){
     $skor1_hazirla->execute([
         'team_id' => $takim1['team_id'],
-        'attigi' => $team1_gol,
-        'yedigi' => $team2_gol,
-        'puan' => 0,
-        'avg' => 0,
-        'kazandigi' => 0
+        'attigi' => (int)$skor1['attigi'] + $team1_gol,
+        'yedigi' => (int)$skor1['yedigi'] + $team2_gol,
+        'puan' => (int)$skor1['puan'] + 0,
+        'avg' => (int)$skor1['avg'] + 0,
+        'kazandigi' => (int)$skor1['kazandigi'] + 0
     ]);
 
     $skor2_hazirla->execute([
         'team_id' => $takim2['team_id'],
-        'attigi' => $team2_gol,
-        'yedigi' => $team1_gol,
-        'puan' => 3,
-        'avg' => $team2_gol - $team1_gol,
-        'kazandigi' => 1
+        'attigi' => (int)$skor2['attigi'] + $team2_gol,
+        'yedigi' => (int)$skor2['yedigi'] + $team1_gol,
+        'puan' => (int)$skor2['puan'] + 3,
+        'avg' => (int)$skor2['avg'] + ($team2_gol - $team1_gol),
+        'kazandigi' => (int)$skor2['kazandigi'] + 1
     ]);
 }else {
 
     $skor1_hazirla->execute([
         'team_id' => $takim1['team_id'],
-        'attigi' => $team1_gol,
-        'yedigi' => $team2_gol,
-        'puan' => 1,
-        'avg' => 1,
-        'kazandigi' => 0
+        'attigi' => (int)$skor1['attigi'] + $team1_gol,
+        'yedigi' => (int)$skor1['yedigi'] + $team2_gol,
+        'puan' => (int)$skor1['puan'] + 1,
+        'avg' => (int)$skor1['avg'] + 1,
+        'kazandigi' => (int)$skor1['kazandigi'] + 0
     ]);
 
     $skor2_hazirla->execute([
         'team_id' => $takim2['team_id'],
-        'attigi' => $team2_gol,
-        'yedigi' => $team1_gol,
-        'puan' => 1,
-        'avg' => 1,
-        'kazandigi' => 0
+        'attigi' => (int)$skor2['attigi'] + $team2_gol,
+        'yedigi' => (int)$skor2['yedigi'] + $team1_gol,
+        'puan' => (int)$skor2['puan'] + 1,
+        'avg' => (int)$skor2['avg'] + 1,
+        'kazandigi' => (int)$skor2['kazandigi'] + 0
     ]);
 }
 
+if($team3_gol > $team4_gol){
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team4_gol,
+        'puan' => (int)$skor3['puan'] + 3,
+        'avg' => (int)$skor3['avg'] + ($team3_gol - $team4_gol),
+        'kazandigi' => (int)$skor3['kazandigi'] + 1
+    ]);
 
+    $skor4_hazirla->execute([
+        'team_id' => $takim4['team_id'],
+        'attigi' => (int)$skor4['attigi'] + $team4_gol,
+        'yedigi' => (int)$skor4['yedigi'] + $team3_gol,
+        'puan' => (int)$skor4['puan'] + 0,
+        'avg' => (int)$skor4['avg'] + 0,
+        'kazandigi' => (int)$skor4['kazandigi'] + 0
+    ]);
+
+}else if($team4_gol > $team3_gol){
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team4_gol,
+        'puan' => (int)$skor3['puan'] + 0,
+        'avg' => (int)$skor3['avg'] + 0,
+        'kazandigi' => (int)$skor3['kazandigi'] + 0
+    ]);
+
+    $skor4_hazirla->execute([
+        'team_id' => $takim4['team_id'],
+        'attigi' => (int)$skor4['attigi'] + $team4_gol,
+        'yedigi' => (int)$skor4['yedigi'] + $team3_gol,
+        'puan' => (int)$skor4['puan'] + 3,
+        'avg' => (int)$skor4['avg'] + ($team4_gol - $team3_gol),
+        'kazandigi' => (int)$skor4['kazandigi'] + 1
+    ]);
+}else {
+
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team4_gol,
+        'puan' => (int)$skor3['puan'] + 1,
+        'avg' => (int)$skor3['avg'] + 1,
+        'kazandigi' => (int)$skor3['kazandigi'] + 0
+    ]);
+
+    $skor4_hazirla->execute([
+        'team_id' => $takim4['team_id'],
+        'attigi' => (int)$skor4['attigi'] + $team4_gol,
+        'yedigi' => (int)$skor4['yedigi'] + $team3_gol,
+        'puan' => (int)$skor4['puan'] + 1,
+        'avg' => (int)$skor4['avg'] + 1,
+        'kazandigi' => (int)$skor4['kazandigi'] + 0
+    ]);
+}
+
+if ($takim1['strength'] > $takim3['strength'] ){
+    $team1_gol = rand(1, 4);
+    $team3_gol = rand(0, 3);
+}elseif ($takim3['strength'] > $takim1['strength']){
+    $team3_gol = rand(1, 4);
+    $team1_gol = rand(0, 3);
+}else{
+    $team1_gol = rand(0, 2);
+    $team3_gol = rand(0, 2);
+}
+
+if ($takim2['strength'] > $takim4['strength']){
+    $team2_gol = rand(1, 4);
+    $team4_gol = rand(0, 3);
+}elseif ($takim4['strength'] > $takim2['strength']){
+    $team4_gol = rand(1, 4);
+    $team2_gol = rand(0, 3);
+}else{
+    $team4_gol = rand(0, 2);
+    $team2_gol = rand(0, 2);
+}
+
+$skor1 = $db->query("SELECT * FROM skors WHERE team_id=" . $takim1['team_id'])->fetch(PDO::FETCH_ASSOC);
+$skor2 = $db->query("SELECT * FROM skors WHERE team_id=" . $takim2['team_id'])->fetch(PDO::FETCH_ASSOC);
+$skor3 = $db->query("SELECT * FROM skors WHERE team_id=" . $takim3['team_id'])->fetch(PDO::FETCH_ASSOC);
+$skor4 = $db->query("SELECT * FROM skors WHERE team_id=" . $takim4['team_id'])->fetch(PDO::FETCH_ASSOC);
+
+
+$skor1_hazirla = $db->prepare("UPDATE skors 
+                                        SET attigi=:attigi, yedigi=:yedigi, avg=:avg, kazandigi=:kazandigi, puan=:puan 
+                                        WHERE team_id=:team_id");
+$skor2_hazirla = $db->prepare("UPDATE skors 
+                                        SET attigi=:attigi, yedigi=:yedigi, avg=:avg, kazandigi=:kazandigi, puan=:puan 
+                                        WHERE team_id=:team_id");
+$skor3_hazirla = $db->prepare("UPDATE skors 
+                                        SET attigi=:attigi, yedigi=:yedigi, avg=:avg, kazandigi=:kazandigi, puan=:puan 
+                                        WHERE team_id=:team_id");
+$skor4_hazirla = $db->prepare("UPDATE skors 
+                                        SET attigi=:attigi, yedigi=:yedigi, avg=:avg, kazandigi=:kazandigi, puan=:puan 
+                                        WHERE team_id=:team_id");
+
+
+if($team1_gol > $team3_gol){
+    $skor1_hazirla->execute([
+        'team_id' => $takim1['team_id'],
+        'attigi' => (int)$skor1['attigi'] + $team1_gol,
+        'yedigi' => (int)$skor1['yedigi'] + $team3_gol,
+        'puan' => (int)$skor1['puan'] + 3,
+        'avg' => (int)$skor1['avg'] + ($team1_gol - $team3_gol),
+        'kazandigi' => (int)$skor1['kazandigi'] + 1
+    ]);
+
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team1_gol,
+        'puan' => (int)$skor3['puan'] + 0,
+        'avg' => (int)$skor3['avg'] + 0,
+        'kazandigi' => (int)$skor3['kazandigi'] + 0
+    ]);
+
+}else if($team3_gol > $team1_gol){
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team1_gol,
+        'puan' => (int)$skor3['puan'] + 3,
+        'avg' => (int)$skor3['avg'] + ($team3_gol - $team1_gol),
+        'kazandigi' => (int)$skor3['kazandigi'] + 1
+    ]);
+
+    $skor1_hazirla->execute([
+        'team_id' => $takim1['team_id'],
+        'attigi' => (int)$skor1['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor1['yedigi'] + $team1_gol,
+        'puan' => (int)$skor1['puan'] + 3,
+        'avg' => (int)$skor1['avg'] + 0,
+        'kazandigi' => (int)$skor1['kazandigi'] + 0
+    ]);
+}else {
+
+    $skor1_hazirla->execute([
+        'team_id' => $takim1['team_id'],
+        'attigi' => (int)$skor1['attigi'] + $team1_gol,
+        'yedigi' => (int)$skor1['yedigi'] + $team3_gol,
+        'puan' => (int)$skor1['puan'] + 1,
+        'avg' => (int)$skor1['avg'] + 1,
+        'kazandigi' => (int)$skor1['kazandigi'] + 0
+    ]);
+
+    $skor3_hazirla->execute([
+        'team_id' => $takim3['team_id'],
+        'attigi' => (int)$skor3['attigi'] + $team3_gol,
+        'yedigi' => (int)$skor3['yedigi'] + $team1_gol,
+        'puan' => (int)$skor3['puan'] + 1,
+        'avg' => (int)$skor3['avg'] + 1,
+        'kazandigi' => (int)$skor3['kazandigi'] + 0
+    ]);
+}
+
+if ($team2_gol > $team4_gol){
+    $skor2_hazirla->execute([
+        'team_id' => $takim2['team_id'],
+        'attigi' => (int)$skor2['attigi'] + $team2_gol,
+        'yedigi' => (int)$skor2['yedigi'] + $team4_gol,
+        'puan' => (int)$skor2['puan'] + 3,
+        'avg' => (int)$skor2['avg'] + ($team2_gol - $team4_gol),
+        'kazandigi' => (int)$skor2['kazandigi'] + 1
+    ]);
+    $skor4_hazirla->execute([
+       'team_id' => (int)$takim4['team_id'],
+       'attigi' => (int)$skor4['team_id'] + $team4_gol,
+       'yedigi' => (int)$skor4['yedigi'] + $team2_gol,
+       'puan' => (int)$skor4['puan'] + 0,
+       'avg' => (int)$skor4['avg'] + 0,
+       'kazandigi' => (int)$skor4['kazandigi'] + 0
+    ]);
+}elseif ($team4_gol > $team2_gol){
+    $skor4_hazirla->execute([
+       'team_id' => (int)$takim4['team_id'],
+       'attigi' => (int)$skor4['attigi'] + $team4_gol,
+       'yedigi' => (int)$skor4['yedigi'] + $team2_gol,
+       'puan' => (int)$skor4['puan'] + 3,
+       'avg' => (int)$skor4['avg'] + ($team4_gol - $team2_gol),
+       'kazandigi' => (int)$skor4['kazandigi'] + 3
+    ]);
+    $skor2_hazirla->execute([
+       'team_id' => (int)$takim2['team_id'],
+       'attigi' => (int)$takim2['attigi'] + $team2_gol,
+       'yedigi' => (int)$takim2['yedigi'] + $team4_gol,
+       'puan' => (int)$takim2['puan'] + 0,
+       'avg' => (int)$takim2['avg'] + 0,
+       'kazandigi' => (int)$takim2['kazandigi'] + 0
+    ]);
+}else{
+    $skor4_hazirla->execute([
+        'team_id' => (int)$takim4['team_id'],
+        'attigi' => (int)$takim4['attigi'] + $team4_gol,
+        'yedigi' => (int)$takim4['yedigi'] + $team2_gol,
+        'puan' => (int)$takim4['puan'] + 1,
+        'avg' => (int)$takim4['avg'] + 1,
+        'kazandigi' => (int)$takim4['kazandigi'] + 0
+    ]);
+    $skor2_hazirla->execute([
+        'team_id' => (int)$takim2['team_id'],
+        'attigi' => (int)$takim2['attigi'] + $team2_gol,
+        'yedigi' => (int)$takim2['yedigi'] + $team4_gol,
+        'puan' => (int)$takim2['puan'] + 1,
+        'avg' => (int)$takim2['avg'] + 1,
+        'kazandigi' => (int)$takim2['kazandigi'] + 0,
+    ]);
+}
 
 
 
