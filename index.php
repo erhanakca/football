@@ -31,14 +31,11 @@ $team = $db->query("SELECT * FROM teams")->fetchAll(PDO::FETCH_ASSOC)
                 <li class="list-group-item fw-bold d-flex justify-content-between align-items-center">
                     <a skor_data.php?lig_id=<?php echo $item['lig_id']?> ><?php echo $item['lig_name'] ?></a>
                     <span class="badge bg-warning rounded-pill"><?php echo $item['team_count'] ?> TEAM</span>
+                    <span><a href="skor_data.php?lig_id=<?php echo $item['lig_id']?>"><button type="button" class="btn btn-sm btn-danger col-12 py-4"><i class="fa-regular fa-futbol"></i> P l a y</button></a></span>
+                    <span><a href="delete.php?lig_id=<?php echo $item['lig_id']?>"><button type="button" class="btn btn-sm btn-danger col-12 py-4"><i class="fa-solid fa-trash-can-xmark"></i> Leage Delete</button></a></span>
                 </li>
                 <?php endforeach; ?>
             </ul>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-2 mt-5">
-            <a href="play.php"><button type="button" class="btn btn-danger col-12 py-4"><i class="fa-regular fa-futbol"></i> PLAY</button></a>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/7ed19c3a98.js" crossorigin="anonymous"></script>
