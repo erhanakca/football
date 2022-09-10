@@ -5,7 +5,7 @@ require 'database.php';
 
 $team = $db->prepare("INSERT INTO teams (lig_id, team_name, team_strength) VALUES (?,?,?)");
 
-$skor = $db->prepare("INSERT INTO skors (team_id) VALUES (?,?)");
+$skor = $db->prepare("INSERT INTO skors (team_id, team_name) VALUES (?,?)");
 
 $ligHazirla = $db->prepare("UPDATE ligs SET team_count=:team_count WHERE lig_id=:lig_id");
 
@@ -22,7 +22,8 @@ $teamUygula = $team->execute([
 
 $sonTeamId = $db->lastInsertId();
 $skorUygula = $skor->execute([
-   $sonTeamId
+   $sonTeamId,
+   $_POST['team_name'],
 ]);
 }
 if ($teamUygula){

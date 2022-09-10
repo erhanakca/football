@@ -21,7 +21,7 @@
                 <?php foreach ($skor as $item): ?>
                 <thead>
                 <tr>
-                    <th><?php echo $item['team_id']?></th>
+                    <th><?php echo $item['team_name']?></th>
                     <th><?php echo $item['attigi']?></th>
                     <th><?php echo $item['yedigi']?></th>
                     <th><?php echo $item['mac_sayisi']?></th>
